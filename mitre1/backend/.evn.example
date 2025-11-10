@@ -1,0 +1,190 @@
+# ===================================
+# MITRE Matrix Dashboard - Backend Configuration
+# ===================================
+# Copy this file to .env and fill in your actual values
+# Command: cp .env.example .env (Linux/Mac) or copy .env.example .env (Windows)
+#
+# ⚠️ NEVER commit .env file to git!
+# ===================================
+
+# ===================================
+# Elasticsearch Configuration
+# ===================================
+
+# Elasticsearch URL
+# Default: http://localhost:9200
+# Production example: https://your-elasticsearch.company.com:9200
+ES_URL=http://localhost:9200
+
+# Elasticsearch Authentication
+# Leave empty if no authentication required
+# For production, use actual credentials
+ES_USER=
+ES_PASS=
+
+# Elasticsearch Index Patterns
+# Windows Events Index (for legacy endpoints)
+ES_INDEX_NAME=.ds-winlogbeats-9.1.5-*
+
+# Multi-source Index Patterns
+PALO_XSIAM_INDEX=palo-xsiam-*
+CROWDSTRIKE_INDEX=crowdstrike-*
+
+# ===================================
+# API Server Configuration
+# ===================================
+
+# API Port
+# Default: 8000
+API_PORT=8000
+
+# API Host
+# 0.0.0.0 allows external access
+# 127.0.0.1 for localhost only
+API_HOST=0.0.0.0
+
+# Environment
+# Options: development, production, staging
+FLASK_ENV=development
+ENVIRONMENT=development
+
+# ===================================
+# CORS Configuration
+# ===================================
+
+# Allowed origins for CORS (comma-separated)
+# Add your frontend URLs here
+CORS_ORIGINS=http://localhost:5173,http://localhost:3000
+
+# ===================================
+# Data Sources
+# ===================================
+
+# Path to MITRE ATT&CK data file (relative to backend/)
+# Default: ../frontend/public/data/enterprise-attack.json
+MITRE_DATA_PATH=../frontend/public/data/enterprise-attack.json
+
+# ===================================
+# Query Configuration
+# ===================================
+
+# Default time range for queries (in days)
+DEFAULT_DAY_RANGE=7
+
+# Maximum results per page
+MAX_PAGE_SIZE=100
+
+# Default page size
+DEFAULT_PAGE_SIZE=10
+
+# ===================================
+# Security Settings (Optional)
+# ===================================
+
+# API Key for authentication
+# Uncomment and set a strong key for production
+# API_KEY=your-secret-api-key-here
+
+# Rate limiting (requests per minute)
+# Uncomment to enable
+# RATE_LIMIT=60
+
+# ===================================
+# Logging Configuration (Optional)
+# ===================================
+
+# Log level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+LOG_LEVEL=INFO
+
+# Log file path
+# Uncomment to enable file logging
+# LOG_FILE=logs/api.log
+
+# ===================================
+# Cache Configuration (Optional)
+# ===================================
+
+# Enable caching
+# CACHE_ENABLED=true
+
+# Cache TTL in seconds (5 minutes)
+# CACHE_TTL=300
+
+# Redis URL (if using Redis for caching)
+# REDIS_URL=redis://localhost:6379/0
+
+# ===================================
+# Database Configuration (Optional)
+# ===================================
+
+# PostgreSQL/MySQL database URL
+# DATABASE_URL=postgresql://user:password@localhost:5432/mitre_dashboard
+
+# ===================================
+# Advanced Elasticsearch Settings (Optional)
+# ===================================
+
+# Connection timeout (seconds)
+ES_TIMEOUT=30
+
+# Max retries for failed requests
+ES_MAX_RETRIES=3
+
+# SSL/TLS certificate verification
+ES_VERIFY_CERTS=false
+
+# Use SSL/TLS connection
+ES_USE_SSL=false
+
+# ===================================
+# Feature Flags (Optional)
+# ===================================
+
+# Enable experimental features
+ENABLE_EXPERIMENTAL=false
+
+# Enable metrics collection
+ENABLE_METRICS=false
+
+# ===================================
+# External Services (Optional)
+# ===================================
+
+# Webhook URL for security alerts
+# WEBHOOK_URL=https://your-webhook-url.com/alerts
+
+# SMTP Configuration for email alerts
+# SMTP_HOST=smtp.gmail.com
+# SMTP_PORT=587
+# SMTP_USER=your-email@gmail.com
+# SMTP_PASS=your-app-password
+# ALERT_EMAIL=security-team@company.com
+
+# Slack Integration
+# SLACK_WEBHOOK_URL=https://hooks.slack.com/services/YOUR/WEBHOOK/URL
+
+# ===================================
+# Development Settings
+# ===================================
+
+# Enable debug mode (development only!)
+# DEBUG=true
+
+# Auto-reload on code changes (development only!)
+# RELOAD=true
+
+# ===================================
+# Production Settings
+# ===================================
+
+# Number of worker processes (production)
+# WORKERS=4
+
+# Worker class (production)
+# WORKER_CLASS=uvicorn.workers.UvicornWorker
+
+# Maximum requests per worker (prevents memory leaks)
+# MAX_REQUESTS=1000
+
+# Graceful timeout (seconds)
+# GRACEFUL_TIMEOUT=30

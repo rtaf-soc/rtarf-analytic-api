@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  # === PostgreSQL Database ===
+  postgres:
+    image: postgres:14
+    container_name: postgres-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASS}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - elastic-network
+    ports:
+      - "5432:5432"
+
+   # === FastAPI Backend (Instance 1) ===
+  backend1:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: main-backend-8000
+    environment:
+      PORT: 8000
+      DATABASE_URL: ${DATABASE_URL}
+      ES_URL: ${ES_URL}
+      ES_USER: ${ES_USER}
+      ES_PASS: ${ES_PASS}
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    networks:
+      - elastic-network
+    restart: unless-stopped
+
+  # === FastAPI Backend (Instance 2) ===
+  backend2:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: postgres-api-8001
+    environment:
+      PORT: 8001
+      DATABASE_URL: ${DATABASE_URL}
+      ES_URL: ${ES_URL}
+      ES_USER: ${ES_USER}
+      ES_PASS: ${ES_PASS}
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001"]
+    ports:
+      - "8001:8001"
+    depends_on:
+      - postgres
+    networks:
+      - elastic-network
+    restart: unless-stopped
+
+networks:
+  elastic-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

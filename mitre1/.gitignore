@@ -1,0 +1,72 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Build outputs
+dist
+dist-ssr
+*.local
+build/
+frontend/dist/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+backend/venv/
+backend/.env
+*.egg-info/
+.pytest_cache/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+*.env
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Elasticsearch
+elasticsearch/data/
+
+# Docker
+docker/volumes/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swp
+*~
+
+# OS
+Thumbs.db
+.DS_Store
+
+#ML
+ml/data/
+# Misc
+cti
+*.bak
+*.tmp
